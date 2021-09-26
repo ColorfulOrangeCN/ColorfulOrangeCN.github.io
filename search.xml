@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>test</title>
+    <url>/test/</url>
+    <content><![CDATA[
+]]></content>
+  </entry>
+  <entry>
+    <title>写在开始</title>
+    <url>/start_place/</url>
+    <content><![CDATA[<p>自己搭建了一个博客，话说github的ID怎么这么esu，要啥啥没有。 这个博客主要是放一些算法类的东西，还有板子</p>
+]]></content>
+  </entry>
+</search>
