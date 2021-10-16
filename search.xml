@@ -3,8 +3,8 @@
   <entry>
     <title>对于递推式为多项式的证明</title>
     <url>/proofpoly/</url>
-    <content><![CDATA[<span id="more"></span>
-<p>考虑证明一个式子为多项式</p>
+    <content><![CDATA[<p>考虑证明一个式子为多项式</p>
+<span id="more"></span>
 <p>若记 <span class="math inline">\(G(x)\)</span> 为一个多项式（注意：此处要求是一个连续多项式，不能分段） <span class="math display">\[
 \Delta F(x)=G(x)
 \]</span></p>
