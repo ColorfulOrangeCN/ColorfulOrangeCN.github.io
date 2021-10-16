@@ -173,6 +173,78 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh">
+    <link itemprop="mainEntityOfPage" href="http://example.com/header/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="green_orange">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="GreenOrange's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/header/" class="post-title-link" itemprop="url">板子与头文件</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-10-10 21:36:32" itemprop="dateCreated datePublished" datetime="2021-10-10T21:36:32+08:00">2021-10-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-10-16 21:59:16" itemprop="dateModified" datetime="2021-10-16T21:59:16+08:00">2021-10-16</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="板子与头文件">板子与头文件</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/header/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh">
     <link itemprop="mainEntityOfPage" href="http://example.com/charcomb/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -196,10 +268,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-10-10 21:36:32 / Modified: 22:12:33" itemprop="dateCreated datePublished" datetime="2021-10-10T21:36:32+08:00">2021-10-10</time>
+              <time title="Created: 2021-10-10 21:36:32" itemprop="dateCreated datePublished" datetime="2021-10-10T21:36:32+08:00">2021-10-10</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-10-16 21:59:13" itemprop="dateModified" datetime="2021-10-16T21:59:13+08:00">2021-10-16</time>
+              </span>
 
           
 
@@ -214,36 +292,14 @@
       
           <h2 id="组合类">组合类</h2>
 <p>组合类是代数结构 <span class="math inline">\(\mathcal{C}=(\mathcal{S}, f)\)</span> 其中 <span class="math inline">\(f\)</span> 是 <span class="math inline">\(\mathcal{S}\rarr \mathbb{N}\)</span> 的一个大小函数。</p>
-<p>对于组合类我们定义其的和与直积：</p>
-<p>和： <span class="math display">\[
-(\mathcal{S}_1, f_1) + (\mathcal{S}_2, f_2) = (\mathcal{S}_1 + \mathcal{S}_2, g)\\
-其中：
-g(x) = \begin{cases}
-f_1(x) &amp;&amp; x \in \mathcal{S}_1 \\
-f_2(x) &amp;&amp; x \in \mathcal{S}_1
-\end{cases}
-\]</span> 直积： <span class="math display">\[
-(\mathcal{S}_1, f_1) \times (\mathcal{S}_2, f_2) = (\mathcal{S}_1 \times \mathcal{S}_2, g)\\
-其中：
-g((x_1, x_2)) = f_1(x_1) + f_2(x_2)
-\]</span></p>
-<h2 id="组合类与生成函数">组合类与生成函数</h2>
-<p>我们定义组合类 <span class="math inline">\(\mathcal{C}\)</span> 的 OGF <span class="math inline">\(G(\mathcal{C})\)</span>： <span class="math display">\[ {2}
-G(\mathcal{C};z) = \sum_{x \in \mathcal{C}} z^{f(x)}
-\]</span> 则有:</p>
-<p>组合类的直积对应生成函数的积，组合类的和对应生成函数的和。</p>
-<p>显然我们发现有标号组合类 <span class="math inline">\(C\)</span></p>
-<h2 id="组合类的更多构造">组合类的更多构造</h2>
-<h3 id="operatornameseq-运算"><span class="math inline">\(\operatorname{SEQ}\)</span> 运算:</h3>
-<p><span class="math display">\[
-\operatorname{SEQ}(C)=\epsilon + C + C\times C + C\times C\times C + \cdots
-\]</span></p>
-<p>即任意多组合类<span class="math inline">\(C\)</span>组合在一起的结果。</p>
-<p>我们有 <span class="math display">\[
-B=\operatorname{SEQ}(C)\\
-B(z)=\cfrac{1}{1-C(z)}
-\]</span></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/charcomb/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -285,10 +341,16 @@ B(z)=\cfrac{1}{1-C(z)}
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-09-28 21:52:59 / Modified: 23:24:05" itemprop="dateCreated datePublished" datetime="2021-09-28T21:52:59+08:00">2021-09-28</time>
+              <time title="Created: 2021-09-28 21:52:59" itemprop="dateCreated datePublished" datetime="2021-09-28T21:52:59+08:00">2021-09-28</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-10-16 21:59:41" itemprop="dateModified" datetime="2021-10-16T21:59:41+08:00">2021-10-16</time>
+              </span>
 
           
 
@@ -301,7 +363,8 @@ B(z)=\cfrac{1}{1-C(z)}
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>考虑证明一个式子为多项式</p>
+          <span id="more"></span>
+<p>考虑证明一个式子为多项式</p>
 <p>若记 <span class="math inline">\(G(x)\)</span> 为一个多项式（注意：此处要求是一个连续多项式，不能分段） <span class="math display">\[
 \Delta F(x)=G(x)
 \]</span></p>
@@ -325,64 +388,6 @@ F(x) = \sum_{x_0}^xG(x) + F(x_0-1)
 <li><span class="math inline">\(\deg \sum_{i=x_0}^x f(x)=\deg f(x) + 1\)</span></li>
 </ul>
 <p>利用这三条式子的组合，我们可以得到式子的次数，以更好的解题。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh">
-    <link itemprop="mainEntityOfPage" href="http://example.com/test/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="green_orange">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="GreenOrange's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/test/" class="post-title-link" itemprop="url">test</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-09-26 20:41:08" itemprop="dateCreated datePublished" datetime="2021-09-26T20:41:08+08:00">2021-09-26</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
 
       
     </div>
@@ -528,7 +533,7 @@ F(x) = \sum_{x_0}^xG(x) + F(x_0-1)
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
