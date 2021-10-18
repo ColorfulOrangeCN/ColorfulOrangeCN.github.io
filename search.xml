@@ -95,4 +95,61 @@ B(z)=\cfrac{1}{1-C(z)}
     <content><![CDATA[<p>自己搭建了一个博客，话说github的ID怎么这么esu，要啥啥没有。 这个博客主要是放一些算法类的东西，还有板子</p>
 ]]></content>
   </entry>
+  <entry>
+    <title>FWT变换</title>
+    <url>/fwt/</url>
+    <content><![CDATA[<h1 id="fwt变换">FWT变换</h1>
+<p>本文参考 <a href="https://codeforces.com/blog/entry/96003" class="uri">https://codeforces.com/blog/entry/96003</a></p>
+<h2 id="fwt">FWT</h2>
+<p>考虑两个数组 <span class="math inline">\(A\)</span> <span class="math inline">\(B\)</span> ，求解数组 <span class="math inline">\(C\)</span> 有 <span class="math display">\[
+C_k = \sum_{i*j=k}A_i B_j
+\]</span> <span id="more"></span> 我们考察 <span class="math inline">\(*\)</span> 为 <span class="math inline">\(\oplus\)</span>，关注最简单的情况，即只有一位的情况： 我们可以构造魔法矩阵 <span class="math inline">\(T\)</span> 进行变换: <span class="math display">\[
+T=\left(\begin{matrix}
+a &amp; b\\
+c &amp; d\\
+\end{matrix}\right)
+\]</span></p>
+<p><span class="math display">\[
+T \left( \begin{matrix} p_0 \\ p_1\end{matrix}\right) \cdot
+T\left( \begin{matrix} p_0 \\ p_1\end{matrix}\right) =
+T\left( \begin{matrix} p_0q_0+p_1q_1 \\ p_0q_1 + p_1q_0\end{matrix}\right)
+\]</span></p>
+<p><span class="math display">\[
+\Big( \matrix{ a^2p_0q_0+abp_0q_1+abp_1q_0+b^2p_1q_1 \\ c^2p_0q_0+cdp_0q_1+cdp_1q_0+d^2p_1q_1} \Big)=\Big( \matrix{ ap_0q_0+bp_0q_1+bp_1q_0+ap_1q_1 \\ cp_0q_0+dp_0q_1+dp_1q_0+cp_1q_1} \Big)
+\]</span></p>
+<p>解方程可得： <span class="math inline">\(a^2=a,ab=b,b^2=a\)</span>， 发现：<span class="math inline">\((a,b)={(0,0),(1,1),(1,-1)}\)</span></p>
+<p><span class="math inline">\(c, d\)</span> 同理</p>
+<p>考虑到在运算中 <span class="math inline">\(T\)</span> 应当可逆，则可以解得有: <span class="math inline">\(T=\Big( \matrix{1 &amp; 1 \\ 1&amp; -1} \Big)\)</span> ， 且 <span class="math inline">\(T^{-1}=\frac 12 \Big( \matrix{1 &amp; 1 \\ 1&amp; -1} \Big)\)</span> .</p>
+<p>我们考虑拓展，有记对于长度为2的情况为 <span class="math inline">\(T_0\)</span></p>
+<p>长度为 <span class="math inline">\(2^k\)</span> 记作 <span class="math inline">\(T_{k - 1}\)</span></p>
+<p>则有 <span class="math inline">\(T_k = T_{k - 1} \otimes T_0\)</span>， 其中 <span class="math inline">\(\otimes\)</span> 为 Kronecker 积</p>
+<p>考虑优化 <span class="math inline">\(T_{k - 1}v\)</span> 。</p>
+<h2 id="kronecker-积-1">Kronecker 积 <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></h2>
+<p>发现如下性质:</p>
+<p>设 <span class="math inline">\(v_0, v_1\)</span> 为向量 <span class="math display">\[
+(I_2 \otimes T)\left( \matrix{v_0\\v_1} \right) = \left( \matrix{v_0T\\v_1T} \right)
+\]</span></p>
+<p><span class="math display">\[
+(T \otimes I_2)\left( \matrix{v_0\\v_1} \right) = \left( \matrix{T_{11}v_0 +T_{12}v_1\\ T_{21}v_0 +T_{22}v_1} \right)
+\]</span></p>
+<p>同时借助混合乘积性质，有如下推论： <span class="math display">\[
+A \otimes B \otimes C = (A \otimes I_n \otimes I_n)(I_n \otimes B \otimes I_n)(I_n \otimes I_n \otimes C)=(I_n \otimes I_n \otimes C)(I_n \otimes B \otimes I_n)(A \otimes I_n \otimes I_n)
+\]</span></p>
+<p><span class="math display">\[
+((A \otimes I_n \otimes I_n)(I_n \otimes B \otimes I_n)(I_n \otimes I_n \otimes C))^{-1}=(A \otimes I_n \otimes I_n)^{-1}(I_n \otimes B \otimes I_n)^{-1}(I_n \otimes I_n \otimes C)^{-1}
+\]</span></p>
+<p>则我们的运算可以进行分治简化 <span class="math display">\[
+T_k \left( \matrix{v_0\\v_1}\right) = \left( \matrix{T_{11}T_{k-1}v_0 +T_{12}T_{k -1}v_1\\ T_{21}T_{k-1}v_0 +T_{22}T_{k -1}v_1\\} \right)
+\]</span> 即 FWT 的优化机理</p>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>https://baike.baidu.com/item/%E5%85%8B%E7%BD%97%E5%86%85%E5%85%8B%E7%A7%AF/6282573<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+]]></content>
+      <tags>
+        <tag>math</tag>
+      </tags>
+  </entry>
 </search>
