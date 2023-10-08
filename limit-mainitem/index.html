@@ -19,23 +19,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="GreenOrange&#39;s Blog">
-<meta property="og:url" content="http://example.com/archives/index.html">
+    <meta name="description" content="I. 基础：待定系数法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于无穷小主部的求法">
+<meta property="og:url" content="http://example.com/limit-mainitem/index.html">
 <meta property="og:site_name" content="GreenOrange&#39;s Blog">
+<meta property="og:description" content="I. 基础：待定系数法">
 <meta property="og:locale">
+<meta property="article:published_time" content="2023-10-01T00:00:00.000Z">
+<meta property="article:modified_time" content="2023-10-08T11:26:48.076Z">
 <meta property="article:author" content="green_orange">
+<meta property="article:tag" content="college-math limit">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/archives/">
+<link rel="canonical" href="http://example.com/limit-mainitem/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh","comments":"","permalink":"","path":"archives/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh","comments":true,"permalink":"http://example.com/limit-mainitem/","path":"limit-mainitem/","title":"关于无穷小主部的求法"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Archive | GreenOrange's Blog</title>
+<title>关于无穷小主部的求法 | GreenOrange's Blog</title>
   
 
 
@@ -65,7 +70,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">GreenOrange's Blog</h1>
+      <p class="site-title">GreenOrange's Blog</p>
       <i class="logo-line"></i>
     </a>
   </div>
@@ -118,7 +123,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -131,6 +136,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#i.-%E5%9F%BA%E7%A1%80%E5%BE%85%E5%AE%9A%E7%B3%BB%E6%95%B0%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">I. 基础：待定系数法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ii.-%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3%95%E6%B3%B0%E5%8B%92%E5%B1%95%E5%BC%80"><span class="nav-number">2.</span> <span class="nav-text">II. 通用方法：泰勒展开</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iii.-%E5%B8%B8%E7%94%A8%E7%BB%93%E8%AE%BA"><span class="nav-number">3.</span> <span class="nav-text">III. 常用结论</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -164,152 +170,123 @@
 
     </div>
 
-    <div class="main-inner archive posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
-  
-  
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <span class="collection-header">Um..! 6 posts in total. Keep on posting.</span>
-      </div>
 
-      
-    <div class="collection-year">
-      <span class="collection-header">2023</span>
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh">
+    <link itemprop="mainEntityOfPage" href="http://example.com/limit-mainitem/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="green_orange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="GreenOrange's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="关于无穷小主部的求法 | GreenOrange's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          关于无穷小主部的求法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-10-01 08:00:00" itemprop="dateCreated datePublished" datetime="2023-10-01T08:00:00+08:00">2023-10-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-10-08 19:26:48" itemprop="dateModified" datetime="2023-10-08T19:26:48+08:00">2023-10-08</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="i.-基础待定系数法">I. 基础：待定系数法</h2>
+<span id="more"></span>
+<p>简单而言，就是用主部的形式写下来解方程: <span class="math display">\[
+\lim_{x \rightarrow {x_0}}\cfrac{f(x)}{c\cdot x^p} = 1
+\]</span>
+原理很简单，但是过程挺麻烦，适合用来直接证明主项。有时候用洛必达法则也会变简单（但是为什么不泰勒展开呢？）</p>
+<h2 id="ii.-通用方法泰勒展开">II. 通用方法：泰勒展开</h2>
+<p>结论放在这里，证明过程先咕咕了 <span class="math display">\[
+设有f(x)=\sum r_ix^{p_i} \\ r_i \in R^{\star}
+\]</span></p>
+<p>则记主项为 <span class="math display">\[
+o(f(x))=r_1x^{p_1}
+\]</span> 一句话就是第一个非零的展开项。</p>
+<h2 id="iii.-常用结论">III. 常用结论</h2>
+<p>泰勒展开也巨慢了，还容易错，下面是些结论。</p>
+<p><span class="math display">\[
+o(1-\cos{x}) = \cfrac{x^2}2 \\
+o((1+x)^r-1) = rx \\
+o(e^x - 1) = x \\
+o(ln(1+x)) = x \\
+o(\arcsin{x}) = x \\
+o(\arctan{x}) = x \\
+\]</span></p>
+<p>注意里面的x全部可以被替换为任意无穷小量。</p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-10-08T18:30:52+08:00"
-              content="2023-10-08">
-          10-08
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-        <a class="post-title-link" href="/fwt/" itemprop="url">
-          <span itemprop="name">FWT变换</span>
-        </a>
-      </div>
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/college-math-limit/" rel="tag"># college-math limit</a>
+          </div>
 
-      
-    </header>
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/charcomb/" rel="prev" title="符号化组合">
+                  <i class="fa fa-angle-left"></i> 符号化组合
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/fwt/" rel="next" title="FWT变换">
+                  FWT变换 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
   </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-10-01T08:00:00+08:00"
-              content="2023-10-01">
-          10-01
-        </time>
-      </div>
-
-      <div class="post-title">
-        <a class="post-title-link" href="/limit-mainitem/" itemprop="url">
-          <span itemprop="name">关于无穷小主部的求法</span>
-        </a>
-      </div>
-
-      
-    </header>
-  </article>
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-10-10T21:36:32+08:00"
-              content="2021-10-10">
-          10-10
-        </time>
-      </div>
-
-      <div class="post-title">
-        <a class="post-title-link" href="/charcomb/" itemprop="url">
-          <span itemprop="name">符号化组合</span>
-        </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-10-10T21:36:32+08:00"
-              content="2021-10-10">
-          10-10
-        </time>
-      </div>
-
-      <div class="post-title">
-        <a class="post-title-link" href="/header/" itemprop="url">
-          <span itemprop="name">板子与头文件</span>
-        </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-09-28T21:52:59+08:00"
-              content="2021-09-28">
-          09-28
-        </time>
-      </div>
-
-      <div class="post-title">
-        <a class="post-title-link" href="/proofpoly/" itemprop="url">
-          <span itemprop="name">对于递推式为多项式的证明</span>
-        </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-09-26T20:19:31+08:00"
-              content="2021-09-26">
-          09-26
-        </time>
-      </div>
-
-      <div class="post-title">
-        <a class="post-title-link" href="/start_place/" itemprop="url">
-          <span itemprop="name">写在开始</span>
-        </a>
-      </div>
-
-      
-    </header>
-  </article>
+</div>
 
 
-    </div>
-  </div>
-  
-  
-  
+
+
+
 
 </div>
   </main>
@@ -368,7 +345,7 @@
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","mhchem":false,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","mhchem":false,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
 <script src="/js/third-party/math/mathjax.js"></script>
 
 
