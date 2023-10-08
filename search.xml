@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>FWT变换</title>
+    <url>/fwt/</url>
+    <content><![CDATA[<h1 id="fwt变换">FWT变换</h1>
+<p>本文参考 <a href="https://codeforces.com/blog/entry/96003"
+class="uri">https://codeforces.com/blog/entry/96003</a></p>
+<h2 id="fwt">FWT</h2>
+<p>考虑两个数组 <span class="math inline">\(A\)</span> <span
+class="math inline">\(B\)</span> ，求解数组 <span
+class="math inline">\(C\)</span> 有 <span class="math display">\[
+C_k = \sum_{i*j=k}A_i B_j
+\]</span> <span id="more"></span> 我们考察 <span class="math inline">\(*\)</span> 为
+<span
+class="math inline">\(\oplus\)</span>，关注最简单的情况，即只有一位的情况：
+我们可以构造魔法矩阵 <span class="math inline">\(T\)</span> 进行变换:
+<span class="math display">\[
+T=\left(\begin{matrix}
+a &amp; b\\
+c &amp; d\\
+\end{matrix}\right)
+\]</span></p>
+<p><span class="math display">\[
+T \left( \begin{matrix} p_0 \\ p_1\end{matrix}\right) \cdot
+T\left( \begin{matrix} p_0 \\ p_1\end{matrix}\right) =
+T\left( \begin{matrix} p_0q_0+p_1q_1 \\ p_0q_1 +
+p_1q_0\end{matrix}\right)
+\]</span></p>
+<p><span class="math display">\[
+\Big( \matrix{ a^2p_0q_0+abp_0q_1+abp_1q_0+b^2p_1q_1 \\
+c^2p_0q_0+cdp_0q_1+cdp_1q_0+d^2p_1q_1} \Big)=\Big( \matrix{
+ap_0q_0+bp_0q_1+bp_1q_0+ap_1q_1 \\ cp_0q_0+dp_0q_1+dp_1q_0+cp_1q_1}
+\Big)
+\]</span></p>
+<p>解方程可得： <span class="math inline">\(a^2=a,ab=b,b^2=a\)</span>，
+发现：<span
+class="math inline">\((a,b)={(0,0),(1,1),(1,-1)}\)</span></p>
+<p><span class="math inline">\(c, d\)</span> 同理</p>
+<p>考虑到在运算中 <span class="math inline">\(T\)</span>
+应当可逆，则可以解得有: <span class="math inline">\(T=\Big( \matrix{1
+&amp; 1 \\ 1&amp; -1} \Big)\)</span> ， 且 <span
+class="math inline">\(T^{-1}=\frac 12 \Big( \matrix{1 &amp; 1 \\ 1&amp;
+-1} \Big)\)</span> .</p>
+<p>我们考虑拓展，有记对于长度为2的情况为 <span
+class="math inline">\(T_0\)</span></p>
+<p>长度为 <span class="math inline">\(2^k\)</span> 记作 <span
+class="math inline">\(T_{k - 1}\)</span></p>
+<p>则有 <span class="math inline">\(T_k = T_{k - 1} \otimes
+T_0\)</span>， 其中 <span class="math inline">\(\otimes\)</span> 为
+Kronecker 积</p>
+<p>考虑优化 <span class="math inline">\(T_{k - 1}v\)</span> 。</p>
+<h2 id="kronecker-积-1">Kronecker 积 <a href="#fn1" class="footnote-ref"
+id="fnref1" role="doc-noteref"><sup>1</sup></a></h2>
+<p>发现如下性质:</p>
+<p>设 <span class="math inline">\(v_0, v_1\)</span> 为向量 <span
+class="math display">\[
+(I_2 \otimes T)\left( \matrix{v_0\\v_1} \right) = \left(
+\matrix{v_0T\\v_1T} \right)
+\]</span></p>
+<p><span class="math display">\[
+(T \otimes I_2)\left( \matrix{v_0\\v_1} \right) = \left(
+\matrix{T_{11}v_0 +T_{12}v_1\\ T_{21}v_0 +T_{22}v_1} \right)
+\]</span></p>
+<p>同时借助混合乘积性质，有如下推论： <span class="math display">\[
+A \otimes B \otimes C = (A \otimes I_n \otimes I_n)(I_n \otimes B
+\otimes I_n)(I_n \otimes I_n \otimes C)=(I_n \otimes I_n \otimes C)(I_n
+\otimes B \otimes I_n)(A \otimes I_n \otimes I_n)
+\]</span></p>
+<p><span class="math display">\[
+((A \otimes I_n \otimes I_n)(I_n \otimes B \otimes I_n)(I_n \otimes I_n
+\otimes C))^{-1}=(A \otimes I_n \otimes I_n)^{-1}(I_n \otimes B \otimes
+I_n)^{-1}(I_n \otimes I_n \otimes C)^{-1}
+\]</span></p>
+<p>则我们的运算可以进行分治简化 <span class="math display">\[
+T_k \left( \matrix{v_0\\v_1}\right) = \left( \matrix{T_{11}T_{k-1}v_0
++T_{12}T_{k -1}v_1\\ T_{21}T_{k-1}v_0 +T_{22}T_{k -1}v_1\\} \right)
+\]</span> 即 FWT 的优化机理</p>
+<aside id="footnotes" class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li
+id="fn1"><p>https://baike.baidu.com/item/%E5%85%8B%E7%BD%97%E5%86%85%E5%85%8B%E7%A7%AF/6282573<a
+href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</aside>
+]]></content>
+      <tags>
+        <tag>math</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>符号化组合</title>
+    <url>/charcomb/</url>
+    <content><![CDATA[<h2 id="组合类">组合类</h2>
+<p>组合类是代数结构 <span
+class="math inline">\(\mathcal{C}=(\mathcal{S}, f)\)</span> 其中 <span
+class="math inline">\(f\)</span> 是 <span
+class="math inline">\(\mathcal{S}\rarr \mathbb{N}\)</span>
+的一个大小函数。</p>
+<span id="more"></span>
+<p>对于组合类我们定义其的和与直积：</p>
+<p>和： <span class="math display">\[
+(\mathcal{S}_1, f_1) + (\mathcal{S}_2, f_2) = (\mathcal{S}_1 +
+\mathcal{S}_2, g)\\
+其中：
+g(x) = \begin{cases}
+f_1(x) &amp;&amp; x \in \mathcal{S}_1 \\
+f_2(x) &amp;&amp; x \in \mathcal{S}_1
+\end{cases}
+\]</span> 直积： <span class="math display">\[
+(\mathcal{S}_1, f_1) \times (\mathcal{S}_2, f_2) = (\mathcal{S}_1 \times
+\mathcal{S}_2, g)\\
+其中：
+g((x_1, x_2)) = f_1(x_1) + f_2(x_2)
+\]</span></p>
+<h2 id="组合类与生成函数">组合类与生成函数</h2>
+<p>我们定义组合类 <span class="math inline">\(\mathcal{C}\)</span> 的
+OGF <span class="math inline">\(G(\mathcal{C})\)</span>： <span
+class="math display">\[ {2}
+G(\mathcal{C};z) = \sum_{x \in \mathcal{C}} z^{f(x)}
+\]</span> 则有:</p>
+<p>组合类的直积对应生成函数的积，组合类的和对应生成函数的和。</p>
+<p>显然我们发现有标号组合类 <span class="math inline">\(C\)</span></p>
+<h2 id="组合类的更多构造">组合类的更多构造</h2>
+<h3 id="operatornameseq-运算"><span
+class="math inline">\(\operatorname{SEQ}\)</span> 运算:</h3>
+<p><span class="math display">\[
+\operatorname{SEQ}(C)=\epsilon + C + C\times C + C\times C\times C +
+\cdots
+\]</span></p>
+<p>即任意多组合类<span
+class="math inline">\(C\)</span>组合在一起的结果。</p>
+<p>我们有 <span class="math display">\[
+B=\operatorname{SEQ}(C)\\
+B(z)=\cfrac{1}{1-C(z)}
+\]</span></p>
+]]></content>
+      <tags>
+        <tag>math</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>板子与头文件</title>
+    <url>/header/</url>
+    <content><![CDATA[<h1 id="板子与头文件">板子与头文件</h1>
+<span id="more"></span>
+<h2 id="basis">basis</h2>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Author: $%U%$</span></span><br><span class="line"><span class="comment">Used in Codeforces</span></span><br><span class="line"><span class="comment">Released under MIT License.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">inline</span> <span class="keyword">namespace</span> fopti &#123;</span><br><span class="line">  <span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> P&gt; <span class="keyword">inline</span></span></span><br><span class="line"><span class="function">  T&amp; <span class="title">maximize</span><span class="params">(T &amp;l, <span class="type">const</span> P&amp; r)</span> </span>&#123;<span class="keyword">return</span> l &lt; r ? l = r : l;&#125;</span><br><span class="line">  <span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> P&gt; <span class="keyword">inline</span></span></span><br><span class="line"><span class="function">  T&amp; <span class="title">minimize</span><span class="params">(T &amp;l, <span class="type">const</span> P&amp; r)</span> </span>&#123;<span class="keyword">return</span> l &gt; r ? l = r : l;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int32_t</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">  cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="ranges">ranges</h2>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;utility&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iterator&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;numeric&gt;</span></span></span><br><span class="line"><span class="keyword">namespace</span> franges &#123;</span><br><span class="line">  <span class="keyword">using</span> std::begin;<span class="keyword">using</span> std::end;<span class="keyword">using</span> std::cbegin;<span class="keyword">using</span> std::cend;<span class="keyword">using</span> std::reverse_iterator;</span><br><span class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Iter&gt;</span><br><span class="line">  <span class="keyword">struct</span> <span class="title class_">base_view</span> &#123;</span><br><span class="line">    Iter l, r;</span><br><span class="line">    <span class="keyword">typedef</span> Iter iterator;</span><br><span class="line">    <span class="built_in">base_view</span>(Iter _l, Iter _r) : <span class="built_in">l</span>(_l), <span class="built_in">r</span>(_r) &#123;&#125;</span><br><span class="line">    <span class="function">Iter <span class="title">begin</span><span class="params">()</span> <span class="type">const</span> </span>&#123;<span class="keyword">return</span> l;&#125;</span><br><span class="line">    <span class="function">Iter <span class="title">end</span><span class="params">()</span> <span class="type">const</span> </span>&#123;<span class="keyword">return</span> r;&#125;</span><br><span class="line">    <span class="function">Iter <span class="title">cbegin</span><span class="params">()</span> <span class="type">const</span> </span>&#123;<span class="keyword">return</span> l;&#125;</span><br><span class="line">    <span class="function">Iter <span class="title">cend</span><span class="params">()</span> <span class="type">const</span> </span>&#123;<span class="keyword">return</span> r;&#125;</span><br><span class="line">    <span class="function">reverse_iterator&lt;Iter&gt; <span class="title">rbegin</span><span class="params">()</span> <span class="type">const</span> </span>&#123;<span class="keyword">return</span> <span class="built_in">reverse_iterator</span>&lt;Iter&gt;(l);&#125;</span><br><span class="line">    <span class="function">reverse_iterator&lt;Iter&gt; <span class="title">rend</span><span class="params">()</span> <span class="type">const</span> </span>&#123;<span class="keyword">return</span> <span class="built_in">reverse_iterator</span>&lt;Iter&gt;(r);&#125;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">namespace</span> vw &#123;</span><br><span class="line">    <span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Container&gt;</span></span><br><span class="line"><span class="function">    base_view&lt;<span class="keyword">typename</span> Container::iterator&gt; <span class="title">view</span><span class="params">(Container&amp; con)</span> </span>&#123; <span class="keyword">return</span> <span class="built_in">base_view</span>&lt;<span class="keyword">decltype</span>(<span class="built_in">begin</span>(con))&gt;(<span class="built_in">begin</span>(con), <span class="built_in">end</span>(con)); &#125;</span><br><span class="line">    <span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Container&gt;</span></span><br><span class="line"><span class="function">    base_view&lt;<span class="keyword">typename</span> Container::iterator&gt; <span class="title">view</span><span class="params">(<span class="type">const</span> Container&amp; con)</span> </span>&#123; <span class="keyword">return</span> <span class="built_in">base_view</span>&lt;<span class="keyword">decltype</span>(<span class="built_in">cbegin</span>(con))&gt;(<span class="built_in">cbegin</span>(con), <span class="built_in">cend</span>(con)); &#125;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">cut</span> &#123;</span><br><span class="line">      <span class="type">int</span> l, r;</span><br><span class="line">      <span class="built_in">cut</span>(<span class="type">int</span> _l, <span class="type">int</span> _r) : <span class="built_in">l</span>(_l), <span class="built_in">r</span>(_r) &#123;&#125;</span><br><span class="line">      <span class="built_in">cut</span>(<span class="type">int</span> _r) : <span class="built_in">l</span>(<span class="number">0</span>), <span class="built_in">r</span>(_r) &#123;&#125;</span><br><span class="line">      <span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Range&gt;</span></span><br><span class="line"><span class="function">      <span class="keyword">decltype</span>(<span class="keyword">auto</span>) <span class="title">operator</span><span class="params">()</span> <span class="params">(Range&amp; range)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        <span class="keyword">auto</span> itl = <span class="built_in">begin</span>(range), itr = <span class="built_in">begin</span>(range);</span><br><span class="line">        std::<span class="built_in">advance</span>(itl, l), std::<span class="built_in">advance</span>(itr, r);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">base_view</span>&lt;<span class="keyword">decltype</span>(itl)&gt;(itl, itr);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Range&gt;</span></span><br><span class="line"><span class="function">      <span class="keyword">decltype</span>(<span class="keyword">auto</span>) <span class="title">operator</span><span class="params">()</span> <span class="params">(<span class="type">const</span> Range&amp; range)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        <span class="keyword">auto</span> itl = <span class="built_in">cbegin</span>(range), itr = <span class="built_in">cbegin</span>(range);</span><br><span class="line">        std::<span class="built_in">advance</span>(itl, l), std::<span class="built_in">advance</span>(itr, r);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">base_view</span>&lt;<span class="keyword">decltype</span>(itl)&gt;(itl, itr);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">drop</span> &#123;</span><br><span class="line">      <span class="type">int</span> x;</span><br><span class="line">      <span class="built_in">drop</span>(<span class="type">int</span> _x) : <span class="built_in">x</span>(_x) &#123;&#125;</span><br><span class="line">      <span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Range&gt;</span></span><br><span class="line"><span class="function">      <span class="keyword">decltype</span>(<span class="keyword">auto</span>) <span class="title">operator</span><span class="params">()</span> <span class="params">(Range&amp; range)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        <span class="keyword">auto</span> itl = <span class="built_in">begin</span>(range);</span><br><span class="line">        std::<span class="built_in">advance</span>(itl, x);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">base_view</span>&lt;<span class="keyword">decltype</span>(itl)&gt;(itl, <span class="built_in">end</span>(range));</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Range&gt;</span></span><br><span class="line"><span class="function">      <span class="keyword">decltype</span>(<span class="keyword">auto</span>) <span class="title">operator</span><span class="params">()</span> <span class="params">(<span class="type">const</span> Range&amp; range)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        <span class="keyword">auto</span> itl = <span class="built_in">cbegin</span>(range);</span><br><span class="line">        std::<span class="built_in">advance</span>(itl, x);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">base_view</span>&lt;<span class="keyword">decltype</span>(itl)&gt;(itl, <span class="built_in">cend</span>(range));</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Value&gt;</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">value_iterator</span> : <span class="keyword">public</span> std::iterator&lt;std::random_access_iterator_tag, Value&gt; &#123;</span><br><span class="line">      Value x;</span><br><span class="line">      <span class="keyword">using</span> this_iterator = value_iterator&lt;Value&gt;;</span><br><span class="line">      <span class="keyword">public</span>:</span><br><span class="line">      <span class="built_in">value_iterator</span>() = <span class="keyword">default</span>;</span><br><span class="line">      <span class="built_in">value_iterator</span>(<span class="type">int</span> _x) : <span class="built_in">x</span>(_x) &#123;&#125;</span><br><span class="line">      <span class="built_in">value_iterator</span>(<span class="type">const</span> this_iterator&amp;) = <span class="keyword">default</span>;</span><br><span class="line">      <span class="built_in">value_iterator</span>(this_iterator&amp;&amp;) = <span class="keyword">default</span>;</span><br><span class="line">      <span class="keyword">friend</span> <span class="type">bool</span> <span class="keyword">operator</span>==(<span class="type">const</span> this_iterator&amp;lhs, <span class="type">const</span> this_iterator&amp; rhs) &#123;<span class="keyword">return</span> lhs.x == rhs.x;&#125;</span><br><span class="line">      <span class="keyword">friend</span> <span class="type">bool</span> <span class="keyword">operator</span>!=(<span class="type">const</span> this_iterator&amp;lhs, <span class="type">const</span> this_iterator&amp; rhs) &#123;<span class="keyword">return</span> lhs.x != rhs.x;&#125;</span><br><span class="line">      <span class="keyword">friend</span> <span class="type">bool</span> <span class="keyword">operator</span>&lt;(<span class="type">const</span> this_iterator&amp;lhs, <span class="type">const</span> this_iterator&amp; rhs) &#123;<span class="keyword">return</span> lhs.x &lt; rhs.x;&#125;</span><br><span class="line">      <span class="type">int</span> <span class="keyword">operator</span>-(<span class="type">const</span> this_iterator&amp; oth) <span class="type">const</span> &#123;<span class="keyword">return</span> x - oth.x;&#125;</span><br><span class="line">      this_iterator <span class="keyword">operator</span>+(<span class="type">int</span> oth) <span class="type">const</span> &#123;<span class="keyword">return</span> x + oth;&#125;</span><br><span class="line">      this_iterator <span class="keyword">operator</span>-(<span class="type">int</span> oth) <span class="type">const</span> &#123;<span class="keyword">return</span> x - oth;&#125;</span><br><span class="line">      this_iterator&amp; <span class="keyword">operator</span>+=(<span class="type">int</span> oth) &#123;x += oth; <span class="keyword">return</span> *<span class="keyword">this</span>;&#125;</span><br><span class="line">      this_iterator&amp; <span class="keyword">operator</span>-=(<span class="type">int</span> oth) &#123;x -= oth; <span class="keyword">return</span> *<span class="keyword">this</span>;&#125;</span><br><span class="line">      this_iterator&amp; <span class="keyword">operator</span>++() &#123;++x;<span class="keyword">return</span> *<span class="keyword">this</span>;&#125;</span><br><span class="line">      this_iterator&amp; <span class="keyword">operator</span>--() &#123;--x;<span class="keyword">return</span> *<span class="keyword">this</span>;&#125;</span><br><span class="line">      <span class="type">int</span>&amp; <span class="keyword">operator</span>*() &#123;<span class="keyword">return</span> x;&#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">using</span> num_iterator = value_iterator&lt;<span class="type">int</span>&gt;;</span><br><span class="line">    <span class="function">base_view&lt;num_iterator&gt; <span class="title">range</span><span class="params">(<span class="type">int</span> l, <span class="type">int</span> r)</span> </span>&#123; <span class="keyword">return</span> <span class="built_in">base_view</span>&lt;num_iterator&gt;(l, r); &#125;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">reverse_t</span> &#123;</span><br><span class="line">      <span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Range&gt;</span></span><br><span class="line"><span class="function">      <span class="keyword">auto</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="type">const</span> Range&amp; v)</span> <span class="type">const</span> </span>&#123;<span class="keyword">return</span> <span class="built_in">base_view</span>&lt;<span class="keyword">decltype</span>(<span class="built_in">rbegin</span>(v))&gt;(<span class="built_in">rbegin</span>(v), <span class="built_in">rend</span>(v));&#125;</span><br><span class="line">      <span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Range&gt;</span></span><br><span class="line"><span class="function">      <span class="keyword">auto</span> <span class="title">operator</span><span class="params">()</span><span class="params">(Range&amp; v)</span> <span class="type">const</span> </span>&#123;<span class="keyword">return</span> <span class="built_in">base_view</span>&lt;<span class="keyword">decltype</span>(<span class="built_in">rbegin</span>(v))&gt;(<span class="built_in">rbegin</span>(v), <span class="built_in">rend</span>(v));&#125;</span><br><span class="line">    &#125; reverse;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">namespace</span> fn &#123;</span><br><span class="line"><span class="meta">#   <span class="keyword">define</span> movefunc(funcname) const auto funcname = [](auto&amp; cont, auto... args) &#123;return std::funcname(begin(cont), end(cont), args...);&#125;</span></span><br><span class="line">    <span class="built_in">movefunc</span>(sort); <span class="built_in">movefunc</span>(reverse); <span class="built_in">movefunc</span>(fill); <span class="built_in">movefunc</span>(iota); <span class="built_in">movefunc</span>(partial_sum);</span><br><span class="line"><span class="meta">#   <span class="keyword">undef</span> movefunc</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Value, <span class="keyword">typename</span> Func&gt;</span><br><span class="line"><span class="keyword">auto</span> <span class="keyword">operator</span>|(Value&amp;&amp; l, Func r) &#123; <span class="keyword">return</span> <span class="built_in">r</span>(std::forward&lt;Value&gt;(l)); &#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Value, <span class="keyword">typename</span> Func&gt;</span><br><span class="line">Value&amp; <span class="keyword">operator</span>|=(Value&amp; l, Func r) &#123; <span class="keyword">return</span> l = <span class="built_in">r</span>(l); &#125;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> molambda(expr) ([&amp;](const auto&amp; _) &#123;return expr;&#125;)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> bilambda(expr) ([&amp;](const auto&amp; a, const auto&amp; b) &#123;return expr;&#125;)</span></span><br></pre></td></tr></table></figure>
+<h2 id="covsys">covsys</h2>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;numeric&gt;</span></span></span><br><span class="line"><span class="keyword">namespace</span> fmath &#123;</span><br><span class="line">  <span class="keyword">using</span> std::<span class="type">int64_t</span>;</span><br><span class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, T mods&gt;</span><br><span class="line">  <span class="keyword">struct</span> <span class="title class_">modint_traits</span> &#123;</span><br><span class="line">    <span class="keyword">using</span> <span class="type">promote_t</span> = <span class="type">int64_t</span>;</span><br><span class="line">    <span class="function"><span class="type">static</span> T <span class="title">reduce</span><span class="params">(T a)</span> </span>&#123;(a &lt; mods ? a -= mods : <span class="built_in">void</span>()), (a &gt; mods ? a += mods : <span class="built_in">void</span>());&#125;</span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">promote_t</span> <span class="title">promote</span><span class="params">(T a)</span> </span>&#123;<span class="keyword">return</span> <span class="built_in">static_cast</span>&lt;<span class="type">int64_t</span>&gt;(a);&#125;</span><br><span class="line">    <span class="function"><span class="type">static</span> T <span class="title">mod</span><span class="params">(<span class="type">promote_t</span> a)</span> </span>&#123;<span class="keyword">return</span> a % mods;&#125;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, T mods, <span class="keyword">typename</span> modtraits = modint_traits&lt;T, mods&gt;&gt;</span><br><span class="line">  <span class="keyword">struct</span> basic_covsys &#123;</span><br><span class="line">    <span class="type">static</span> T <span class="built_in">multiple</span>(T a, T b) &#123;<span class="keyword">return</span> modtraits::<span class="built_in">mod</span>(modtraits::<span class="built_in">promote</span>(a) * b);&#125;</span><br><span class="line">    <span class="function"><span class="type">static</span> T <span class="title">add</span><span class="params">(T a, T b)</span> </span>&#123;<span class="keyword">return</span> modtraits::<span class="built_in">reduce</span>(a + b);&#125;</span><br><span class="line">    <span class="function"><span class="type">static</span> T <span class="title">sub</span><span class="params">(T a, T b)</span> </span>&#123;<span class="keyword">return</span> modtraits::<span class="built_in">reduce</span>(a - b);&#125;</span><br><span class="line">    <span class="function"><span class="type">static</span> T <span class="title">power</span><span class="params">(T a, T p)</span> </span>&#123;</span><br><span class="line">      T r = <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">while</span> (p) &#123;</span><br><span class="line">        <span class="keyword">if</span> (p &amp; <span class="number">1</span>)</span><br><span class="line">          r = <span class="built_in">multiple</span>(r, a);</span><br><span class="line">        a = <span class="built_in">multiple</span>(a, a);</span><br><span class="line">        p &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> r;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">static</span> T <span class="title">inv</span><span class="params">(T a)</span> </span>&#123;<span class="keyword">return</span> <span class="built_in">power</span>(a, mods - <span class="number">2</span>);&#125;</span><br><span class="line">    <span class="function"><span class="type">static</span> T <span class="title">factorial</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">      T r = <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt;= x; ++i)</span><br><span class="line">        r = <span class="built_in">multiple</span>(r, i);</span><br><span class="line">      <span class="keyword">return</span> r;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Beginer&gt;</span></span><br><span class="line"><span class="function">    <span class="type">static</span> <span class="type">void</span> <span class="title">make_factorial</span><span class="params">(Beginer l, <span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">      *(l++) = <span class="number">1</span>;</span><br><span class="line">      T la = <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; ++i)</span><br><span class="line">        ++l, la = *l = <span class="built_in">multiple</span>(la, l);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Beginer&gt;</span></span><br><span class="line"><span class="function">    <span class="type">static</span> <span class="type">void</span> <span class="title">make_invfactorial</span><span class="params">(Beginer l, <span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">      T la = <span class="built_in">inv</span>(<span class="built_in">factorial</span>(n - <span class="number">1</span>));</span><br><span class="line">      l += n - <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> i = n - <span class="number">1</span>; i; --i, --l)</span><br><span class="line">        la = *l = <span class="built_in">multiple</span>(la, i);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">template</span>&lt;<span class="type">int</span> mods&gt; <span class="keyword">using</span> int_covsys = basic_covsys&lt;<span class="type">int</span>, mods&gt;;</span><br><span class="line">  <span class="keyword">using</span> covsyspoly = int_covsys&lt;<span class="number">998244353</span>&gt;;</span><br><span class="line">  <span class="keyword">using</span> covsys1e9_7 = int_covsys&lt;<span class="number">1000000007</span>&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>template</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>对于递推式为多项式的证明</title>
+    <url>/proofpoly/</url>
+    <content><![CDATA[<p>考虑证明一个式子为多项式</p>
+<span id="more"></span>
+<p>若记 <span class="math inline">\(G(x)\)</span>
+为一个多项式（注意：此处要求是一个连续多项式，不能分段） <span
+class="math display">\[
+\Delta F(x)=G(x)
+\]</span></p>
+<p>我们可以证明此为其的充要条件，证明如下： 充分性</p>
+<p>则有我们可以将多项式化成下降幂的形式，根据我们对于差分算子的定义，我们很轻松的就得到了
+<span class="math display">\[
+\sum_{x_0}^x x^{\underline{a}} = \cfrac{1}{a+1}(x^{\underline{a+1}} -
+(x_0-1)^{\underline{a+1}})
+\]</span> 则我们证明了 <span class="math display">\[
+\sum_{x_0}^xG(x)
+\]</span> 为一个多项式</p>
+<p>则我们有 <span class="math display">\[
+F(x) = \sum_{x_0}^xG(x) + F(x_0-1)
+\]</span> 得证</p>
+<p>必要性：</p>
+<p>我们考察对于任意多项式 <span class="math inline">\(F(x)\)</span> 则
+<span class="math inline">\(F(x) - F(x-1)\)</span>
+显然为一个多项式,其次数比原多项式少 <span
+class="math inline">\(1\)</span></p>
+<p>以上方式还可以通过多项式的加法后系数不变等性质进行推倒。</p>
+<p>总的说来，当一个递推式中只出现和式，积式，常数乘法，常数加法，函数复合时我们可以认定其是一个多项式</p>
+<p>式子总结</p>
+<ul>
+<li><span class="math inline">\(\deg (f + g)=\max(\deg f, \deg
+g)\)</span></li>
+<li><span class="math inline">\(\deg (f \circ g)= \deg f \deg
+g\)</span></li>
+<li><span class="math inline">\(\deg \sum_{i=x_0}^x f(x)=\deg f(x) +
+1\)</span></li>
+</ul>
+<p>利用这三条式子的组合，我们可以得到式子的次数，以更好的解题。</p>
+]]></content>
+      <tags>
+        <tag>math</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>写在开始</title>
+    <url>/start_place/</url>
+    <content><![CDATA[<p>自己搭建了一个博客，话说github的ID怎么这么esu，要啥啥没有。
+这个博客主要是放一些算法类的东西，还有板子</p>
+]]></content>
+  </entry>
+</search>
