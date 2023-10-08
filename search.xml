@@ -25,14 +25,15 @@ o(f(x))=r_1x^{p_1}
 \]</span> 一句话就是第一个非零的展开项。</p>
 <h2 id="iii.-常用结论">III. 常用结论</h2>
 <p>泰勒展开也巨慢了，还容易错，下面是些结论。</p>
-<p><span class="math display">\[
-o(1-\cos{x}) = \cfrac{x^2}2 \\\\
-o((1+x)^r-1) = rx \\\\
-o(e^x - 1) = x \\\\
-o(ln(1+x)) = x \\\\
-o(\arcsin{x}) = x \\\\
-o(\arctan{x}) = x \\\\
-\]</span></p>
+<ul>
+<li><p><span class="math inline">\(o(1-\cos{x}) =
+\cfrac{x^2}2\)</span></p></li>
+<li><p><span class="math inline">\(o((1+x)^r-1) = rx\)</span></p></li>
+<li><p><span class="math inline">\(o(e^x - 1) = x\)</span></p></li>
+<li><p><span class="math inline">\(o(ln(1+x)) = x\)</span></p></li>
+<li><p><span class="math inline">\(o(\arcsin{x}) = x\)</span></p></li>
+<li><p><span class="math inline">\(o(\arctan{x}) = x\)</span></p></li>
+</ul>
 <p>注意里面的x全部可以被替换为任意无穷小量。</p>
 ]]></content>
       <tags>
